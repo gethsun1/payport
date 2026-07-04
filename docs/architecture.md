@@ -18,10 +18,23 @@ PayPort has three proof surfaces: the buyer checkout, the Railway backend, and t
 
 ## Services
 
-- `apps/web`: Next.js frontend, starting in Phase 3.
+- `apps/web`: Next.js frontend shell with landing, checkout, merchant, receipt, and proof routes.
 - `apps/api`: Fastify API with Prisma and viem.
 - `packages/shared`: Shared zod schemas, constants, and types.
 - `contracts`: Foundry project for the Arbitrum settlement evidence contract.
+
+## Frontend Routes
+
+- `/`: landing page and track compliance summary.
+- `/checkout/[invoiceId]`: real invoice fetch with Magic, Particle, and settlement placeholders.
+- `/receipt/[receiptId]`: receipt proof display without fake settlement success.
+- `/merchant`: merchant overview from backend invoice data.
+- `/merchant/products`: list and create products.
+- `/merchant/invoices`: list and create invoices with checkout links.
+- `/proof`: judge proof dashboard.
+- `/proof/backend-health`: Fastify, database, and Arbitrum health checks.
+- `/proof/magic-health`: Phase 4 placeholder.
+- `/proof/particle-health`: Phase 5 placeholder.
 
 ## Settlement Contract
 
@@ -41,3 +54,5 @@ No route should claim a payment or receipt is successful unless both conditions 
 
 - Particle transaction evidence exists.
 - Arbitrum settlement evidence exists.
+
+The Phase 3 frontend follows this rule by showing placeholders and pending states only.

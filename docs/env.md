@@ -19,6 +19,8 @@ Use `.env.example` as the template. Do not commit real `.env` files.
 
 Only public, non-secret values belong in `NEXT_PUBLIC_*`.
 
+For Phase 3, only `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL`, and `NEXT_PUBLIC_PAYPORT_NETWORK_MODE` are required. Magic and Particle values are optional until their integration phases.
+
 ## Railway Backend
 
 - `NODE_ENV`
@@ -47,6 +49,8 @@ Only public, non-secret values belong in `NEXT_PUBLIC_*`.
 - `SETTLEMENT_RECORDER_ADDRESS`
 
 Do not use `ARBISCAN_API_KEY`; PayPort uses the unified Etherscan V2 API key in `ETHERSCAN_API_KEY`.
+
+Current local contract verification is pending because Foundry is not installed in the active Windows PowerShell environment and WSL is not installed.
 
 ## Sepolia Rehearsal
 

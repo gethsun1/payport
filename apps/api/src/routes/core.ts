@@ -76,6 +76,24 @@ export async function coreRoutes(app: FastifyInstance) {
     });
   });
 
+  app.get("/api/invoices", async (request) => {
+    const query = z.object({ merchantId: z.string().optional() }).parse(request.query);
+    return safeJson(
+      await prisma.invoice.findMany({
+        where: query.merchantId ? { merchantId: query.merchantId } : undefined,
+        include: {
+          merchant: true,
+          product: true,
+          paymentAttempts: { orderBy: { createdAt: "desc" }, take: 3 },
+          settlements: { orderBy: { createdAt: "desc" }, take: 3 },
+          receipts: { orderBy: { createdAt: "desc" }, take: 3 }
+        },
+        orderBy: { createdAt: "desc" },
+        take: 50
+      })
+    );
+  });
+
   app.get("/api/invoices/:id", async (request) => {
     const { id } = parseParams(IdParams, request.params);
     const invoice = await prisma.invoice.findUnique({

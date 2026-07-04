@@ -81,6 +81,21 @@ Phase 2 smart contract foundation is scaffolded:
 - Etherscan V2 verification docs using `ETHERSCAN_API_KEY`
 - ABI exported at `packages/shared/src/abi/PayPortSettlement.json`
 
+Phase 2.5 contract verification gate status:
+
+- Foundry tools are not installed in this Windows PowerShell environment.
+- WSL is not installed, so the recommended path is WSL Ubuntu plus the official Foundry installer.
+- `forge build`, `forge test`, and ABI refresh from Foundry artifacts remain unresolved until Foundry is available.
+
+Phase 3 frontend foundation is scaffolded:
+
+- Next.js App Router app under `apps/web`
+- Landing, checkout, receipt, merchant, and proof routes
+- Tailwind and shadcn-style component primitives
+- API client connected to `NEXT_PUBLIC_API_URL`
+- Magic and Particle health placeholders only
+- No fake payment or receipt success states
+
 ## Assumptions
 
 - IDs use Prisma `cuid()` strings unless a demo seed record needs a stable ID.
@@ -101,6 +116,34 @@ npm run dev --workspace @payport/api
 ```
 
 The API defaults to `http://localhost:4000`.
+
+## Local Frontend Setup
+
+```bash
+npm install
+npm run dev:web
+```
+
+The web app defaults to `http://localhost:3000` and expects:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_PAYPORT_NETWORK_MODE=development
+```
+
+Frontend routes:
+
+- `/`
+- `/checkout/[invoiceId]`
+- `/receipt/[receiptId]`
+- `/merchant`
+- `/merchant/products`
+- `/merchant/invoices`
+- `/proof`
+- `/proof/backend-health`
+- `/proof/magic-health`
+- `/proof/particle-health`
 
 ## Backend API
 
@@ -127,8 +170,9 @@ The API defaults to `http://localhost:4000`.
 
 - Railway backend start command: `npm run start --workspace @payport/api`
 - Railway build command: `npm run build --workspace @payport/api`
-- Vercel frontend will live in `apps/web` in Phase 3.
-- Foundry contracts will live in `contracts` in Phase 2.
+- Vercel frontend root: `apps/web`
+- Vercel frontend build command: `npm run build --workspace @payport/web`
+- Foundry contracts live in `contracts`.
 
 ## Safety Notes
 
@@ -136,18 +180,18 @@ The API defaults to `http://localhost:4000`.
 - Never prefix private keys with `NEXT_PUBLIC`.
 - Use fresh low-balance wallets only.
 - Do not use personal wallets.
-- Do not fake success states.
 - Final proof should use tiny-value mainnet execution only.
 
 ## Known Limitations
 
-- Frontend, Magic, Particle UA, and contract packages are not implemented yet.
+- Magic and Particle UA integrations are not implemented yet.
 - Settlement recording currently validates proof state but returns a clear `settlement_contract_pending` or `settlement_not_configured` error.
 - Receipt creation is intentionally unavailable until a real settlement record exists.
+- Contract build/test verification is pending Foundry installation.
 
 ## Roadmap
 
-1. Build the Next.js checkout and proof UI.
+1. Install Foundry and complete contract verification.
 2. Add Magic email OTP and Google login.
 3. Integrate Particle Universal Accounts in EIP-7702 mode.
 4. Enable Arbitrum One settlement writes.

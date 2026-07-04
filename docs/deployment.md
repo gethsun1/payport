@@ -11,15 +11,25 @@
 
 ## Vercel Frontend
 
-The frontend will be added in Phase 3 under `apps/web`.
+The frontend lives in `apps/web`.
 
 Expected configuration:
 
 - Root directory: `apps/web`
-- Build command: `npm run build`
+- Build command: `npm run build --workspace @payport/web`
 - Public env vars only.
 - Magic domain allowlist includes the Vercel production URL.
 - Google OAuth origins include the Vercel production URL.
+
+Required public env for the current scaffold:
+
+```bash
+NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_APP_URL=
+NEXT_PUBLIC_PAYPORT_NETWORK_MODE=
+```
+
+Magic and Particle variables are optional placeholders until Phases 4 and 5.
 
 ## Contracts
 
@@ -34,6 +44,13 @@ forge --version
 ```
 
 This contract has no external Solidity dependencies.
+
+Current local verification status:
+
+- `forge`, `cast`, and `anvil` are not installed in the current Windows PowerShell environment.
+- WSL is not installed on this machine.
+- Recommended setup: install WSL Ubuntu, then run `curl -L https://foundry.paradigm.xyz | bash` and `foundryup`.
+- `npm run contracts:build`, `npm run contracts:test`, and `npm run contracts:export-abi` are pending until Foundry is available.
 
 ### Build And Test
 
