@@ -7,15 +7,22 @@ export const settlementAbi = [
     type: "function",
     name: "getSettlement",
     stateMutability: "view",
-    inputs: [{ name: "invoiceId", type: "bytes32" }],
+    inputs: [{ name: "invoiceId", type: "string" }],
     outputs: [
-      { name: "invoiceId", type: "bytes32" },
-      { name: "paymentAttemptId", type: "bytes32" },
-      { name: "buyer", type: "address" },
-      { name: "merchant", type: "address" },
-      { name: "amountUsdCents", type: "uint256" },
-      { name: "particleTransactionId", type: "string" },
-      { name: "recordedAt", type: "uint256" }
+      {
+        name: "",
+        type: "tuple",
+        components: [
+          { name: "invoiceId", type: "string" },
+          { name: "buyer", type: "address" },
+          { name: "merchant", type: "address" },
+          { name: "amountUsdCents", type: "uint256" },
+          { name: "particleTxRef", type: "bytes32" },
+          { name: "particleTransactionId", type: "string" },
+          { name: "settled", type: "bool" },
+          { name: "settledAt", type: "uint256" }
+        ]
+      }
     ]
   }
 ] as const;

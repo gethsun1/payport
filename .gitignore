@@ -10,3 +10,6 @@ coverage
 .DS_Store
 docs/deployments/*.json
 apps/api/prisma/migrations/*/migration_lock.toml
+contracts/out
+contracts/cache
+contracts/broadcast

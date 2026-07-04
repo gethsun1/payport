@@ -72,6 +72,15 @@ Phase 0 and Phase 1 are scaffolded:
 - Seed data
 - Honest settlement and receipt guards
 
+Phase 2 smart contract foundation is scaffolded:
+
+- Foundry project under `contracts`
+- `PayPortSettlement` evidence contract
+- Self-contained Foundry tests
+- Arbitrum Sepolia and Arbitrum One deploy script
+- Etherscan V2 verification docs using `ETHERSCAN_API_KEY`
+- ABI exported at `packages/shared/src/abi/PayPortSettlement.json`
+
 ## Assumptions
 
 - IDs use Prisma `cuid()` strings unless a demo seed record needs a stable ID.
@@ -138,9 +147,8 @@ The API defaults to `http://localhost:4000`.
 
 ## Roadmap
 
-1. Add Foundry settlement contract and tests.
-2. Build the Next.js checkout and proof UI.
-3. Add Magic email OTP and Google login.
-4. Integrate Particle Universal Accounts in EIP-7702 mode.
-5. Enable Arbitrum One settlement writes.
-6. Polish the judge proof page and final walkthrough.
+1. Build the Next.js checkout and proof UI.
+2. Add Magic email OTP and Google login.
+3. Integrate Particle Universal Accounts in EIP-7702 mode.
+4. Enable Arbitrum One settlement writes.
+5. Polish the judge proof page and final walkthrough.

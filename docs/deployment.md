@@ -23,12 +23,110 @@ Expected configuration:
 
 ## Contracts
 
-The Foundry project will be added in Phase 2.
+The Foundry project lives in `contracts`.
 
-Expected flow:
+### Local Foundry Setup
 
-1. Deploy to Arbitrum Sepolia for rehearsal.
-2. Run contract tests.
-3. Deploy to Arbitrum One for final proof.
-4. Verify with `ETHERSCAN_API_KEY`.
-5. Save deployment metadata under `docs/deployments/`.
+Install Foundry from the official installer, then confirm:
+
+```bash
+forge --version
+```
+
+This contract has no external Solidity dependencies.
+
+### Build And Test
+
+```bash
+npm run contracts:build
+npm run contracts:test
+```
+
+To export the ABI after a successful Foundry build:
+
+```bash
+npm run contracts:export-abi
+```
+
+The committed ABI lives at `packages/shared/src/abi/PayPortSettlement.json`.
+
+### Deploy To Arbitrum Sepolia
+
+Set:
+
+```bash
+ARBITRUM_SEPOLIA_RPC_URL=
+ARBITRUM_SEPOLIA_PRIVATE_KEY=
+SETTLEMENT_RECORDER_ADDRESS=
+```
+
+Run:
+
+```bash
+forge script contracts/script/DeployPayPortSettlement.s.sol:DeployPayPortSettlement --root contracts --rpc-url arbitrum_sepolia --broadcast
+```
+
+If `SETTLEMENT_RECORDER_ADDRESS` is omitted, the deployer is used as the recorder.
+
+### Deploy To Arbitrum One
+
+Set:
+
+```bash
+ARBITRUM_ONE_RPC_URL=
+ARBITRUM_ONE_PRIVATE_KEY=
+SETTLEMENT_RECORDER_ADDRESS=
+```
+
+Run:
+
+```bash
+forge script contracts/script/DeployPayPortSettlement.s.sol:DeployPayPortSettlement --root contracts --rpc-url arbitrum_one --broadcast
+```
+
+Use a fresh, low-balance deployer wallet.
+
+### Verify With Etherscan V2
+
+The constructor argument is the initial owner address encoded as ABI. Generate it with:
+
+```bash
+cast abi-encode "constructor(address)" <INITIAL_OWNER_ADDRESS>
+```
+
+For Arbitrum Sepolia:
+
+```bash
+forge verify-contract --chain arbitrum-sepolia <CONTRACT_ADDRESS> src/PayPortSettlement.sol:PayPortSettlement --verifier etherscan --etherscan-api-key $ETHERSCAN_API_KEY --constructor-args <ABI_ENCODED_CONSTRUCTOR_ARGS> --watch
+```
+
+For Arbitrum One:
+
+```bash
+forge verify-contract --chain arbitrum <CONTRACT_ADDRESS> src/PayPortSettlement.sol:PayPortSettlement --verifier etherscan --etherscan-api-key $ETHERSCAN_API_KEY --constructor-args <ABI_ENCODED_CONSTRUCTOR_ARGS> --watch
+```
+
+Foundry config also maps both Arbitrum chains to the Etherscan V2 endpoint using `ETHERSCAN_API_KEY`.
+
+### Copy Addresses Into Env
+
+After deployment, update Railway:
+
+```bash
+ARBITRUM_ONE_RPC_URL=
+ARBITRUM_ONE_SETTLEMENT_CONTRACT_ADDRESS=
+SETTLEMENT_EXECUTOR_MAINNET_PRIVATE_KEY=
+```
+
+Update Vercel:
+
+```bash
+NEXT_PUBLIC_ARBITRUM_ONE_SETTLEMENT_CONTRACT_ADDRESS=
+NEXT_PUBLIC_ARBITRUM_SEPOLIA_SETTLEMENT_CONTRACT_ADDRESS=
+```
+
+Do not expose private keys through `NEXT_PUBLIC_*`.
+
+### Deployment Records
+
+Save public deployment metadata in `docs/deployments/README.md` or a chain-specific JSON file. Do not include secrets.

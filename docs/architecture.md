@@ -21,7 +21,19 @@ PayPort has three proof surfaces: the buyer checkout, the Railway backend, and t
 - `apps/web`: Next.js frontend, starting in Phase 3.
 - `apps/api`: Fastify API with Prisma and viem.
 - `packages/shared`: Shared zod schemas, constants, and types.
-- `contracts`: Foundry project, starting in Phase 2.
+- `contracts`: Foundry project for the Arbitrum settlement evidence contract.
+
+## Settlement Contract
+
+`PayPortSettlement` is an evidence layer, not an escrow. Authorized recorders register invoices and record settlements after PayPort has confirmed Particle payment evidence offchain/app-side.
+
+The contract emits:
+
+- `InvoiceRegistered`
+- `SettlementRecorded`
+- `ProductUnlocked`
+
+Records are keyed by `keccak256(bytes(invoiceId))`, while retaining the original string invoice ID for judge-friendly proof display.
 
 ## Proof Rule
 
