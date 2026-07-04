@@ -83,9 +83,11 @@ Phase 2 smart contract foundation is scaffolded:
 
 Phase 2.5 contract verification gate status:
 
-- Foundry tools are not installed in this Windows PowerShell environment.
-- WSL is not installed, so the recommended path is WSL Ubuntu plus the official Foundry installer.
-- `forge build`, `forge test`, and ABI refresh from Foundry artifacts remain unresolved until Foundry is available.
+- Foundry v1.7.1 Windows x64 precompiled binaries were installed under the user-local `.payport-tools` directory.
+- `forge build` passes.
+- `forge test -vvv` passes with 19 tests.
+- ABI refresh from the Foundry artifact passes.
+- On-chain deployment and Etherscan verification are still pending.
 
 Phase 3 frontend foundation is scaffolded:
 
@@ -187,7 +189,7 @@ Frontend routes:
 - Magic and Particle UA integrations are not implemented yet.
 - Settlement recording currently validates proof state but returns a clear `settlement_contract_pending` or `settlement_not_configured` error.
 - Receipt creation is intentionally unavailable until a real settlement record exists.
-- Contract build/test verification is pending Foundry installation.
+- Contract build/test verification passes locally with Foundry v1.7.1.
 
 ## Roadmap
 

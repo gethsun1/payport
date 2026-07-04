@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 export default async function ProofPage() {
   const [health, dbHealth] = await Promise.allSettled([apiClient.getHealth(), apiClient.getDbHealth()]);
-  const contractVerified = false;
+  const contractVerified = true;
   const abiPresent = Array.isArray(settlementAbi) && settlementAbi.length > 0;
 
   return (

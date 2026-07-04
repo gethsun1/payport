@@ -47,10 +47,12 @@ This contract has no external Solidity dependencies.
 
 Current local verification status:
 
-- `forge`, `cast`, and `anvil` are not installed in the current Windows PowerShell environment.
-- WSL is not installed on this machine.
-- Recommended setup: install WSL Ubuntu, then run `curl -L https://foundry.paradigm.xyz | bash` and `foundryup`.
-- `npm run contracts:build`, `npm run contracts:test`, and `npm run contracts:export-abi` are pending until Foundry is available.
+- Foundry v1.7.1 Windows x64 precompiled binaries are available under the user-local `.payport-tools` directory.
+- `forge`, `cast`, and `anvil` version checks pass.
+- `npm run contracts:build` passes.
+- `npm run contracts:test` passes with 19 tests.
+- `npm run contracts:export-abi` refreshes `packages/shared/src/abi/PayPortSettlement.json`.
+- On-chain deployment and Etherscan verification are still pending.
 
 ### Build And Test
 

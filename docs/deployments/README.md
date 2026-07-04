@@ -29,4 +29,4 @@ This directory tracks public deployment metadata only. Do not include private ke
 - Use `ETHERSCAN_API_KEY` for verification on both chains.
 - Copy the final Arbitrum One address into Railway and Vercel env variables after deployment.
 - Keep proof wallets fresh and low-balance.
-- Local verification status: pending Foundry installation. `forge build`, `forge test`, and ABI refresh have not run successfully in the current Windows PowerShell environment.
+- Local verification status: `forge build`, `forge test`, and ABI refresh pass with Foundry v1.7.1 Windows x64 precompiled binaries. Public chain deployments are still pending.

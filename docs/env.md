@@ -50,7 +50,7 @@ For Phase 3, only `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL`, and `NEXT_PUBLIC
 
 Do not use `ARBISCAN_API_KEY`; PayPort uses the unified Etherscan V2 API key in `ETHERSCAN_API_KEY`.
 
-Current local contract verification is pending because Foundry is not installed in the active Windows PowerShell environment and WSL is not installed.
+Current local contract build/test verification passes with Foundry v1.7.1 Windows x64 precompiled binaries. Arbitrum deployment and Etherscan verification still require funded low-balance deployer wallets and RPC configuration.
 
 ## Sepolia Rehearsal
 

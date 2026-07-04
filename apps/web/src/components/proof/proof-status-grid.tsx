@@ -5,7 +5,7 @@ export function ProofStatusGrid({ contractVerified }: { contractVerified: boolea
   const items = [
     { label: "Backend scaffold complete", done: true },
     { label: "Contract implemented", done: true },
-    { label: contractVerified ? "Contract verified" : "Contract verification pending Foundry", done: contractVerified },
+    { label: contractVerified ? "Contract build/test verified" : "Contract build/test pending", done: contractVerified },
     { label: "Frontend scaffold complete", done: true },
     { label: "Magic pending", done: false },
     { label: "Particle pending", done: false },

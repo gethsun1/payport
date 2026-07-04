@@ -72,7 +72,7 @@ contract PayPortSettlementTest is TestBase {
         settlement = new PayPortSettlement(owner);
     }
 
-    function testConstructorSetsOwnerCorrectly() public {
+    function testConstructorSetsOwnerCorrectly() public view {
         assertEq(settlement.owner(), owner);
         assertTrue(settlement.recorders(owner));
     }
